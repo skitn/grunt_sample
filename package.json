@@ -1,0 +1,21 @@
+{
+  "name": "gruntsample",
+  "version": "0.1.0",
+  "description": "Grunt no Sample da ze",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "grunt watch"
+  },
+  "repository": "",
+  "keywords": [
+    "grunt",
+    "sample"
+  ],
+  "author": "skitn",
+  "license": "BSD",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-cssmin": "~0.9.0"
+  }
+}
