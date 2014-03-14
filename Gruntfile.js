@@ -1,22 +1,32 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    cssmin: {
-      compress: {
-        files: {
-          'min.css': ['css/**/*.css'],
-          'min_pc.css': ['css/pc/css/*.css'],
-          'min_pc_fuge.css': ['css/pc/css/fuge.css'],
+    compass: {
+      pc: {
+        options: {
+          sassDir: './public_html/pc/common/sass',
+          cssDir: './public_html/pc/common/css_min',
+          outputStyle : 'compress',
+          noLineComments: true
         }
       }
     },
+    cssmin: {
+      pc: {
+        expand: true,
+        cwd   : './public_html/pc/common/css',
+        src: ['./**/*.css'],
+        dest  : './public_html/pc/common/css_min',
+      }
+    },
     watch: {
-      files: ['css/**/*.css'],
-      tasks: ['cssmin']
+      files: ['./public_html/pc/common/sass/**/*.scss', './public_html/pc/common/css/**/*.css'],
+      tasks: ['compass', 'cssmin']
     },
   });
 
+  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('default', ['compass', 'cssmin']);
 }
