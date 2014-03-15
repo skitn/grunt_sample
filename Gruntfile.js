@@ -7,7 +7,8 @@ module.exports = function(grunt) {
           sassDir: './public_html/pc/common/sass',
           cssDir: './public_html/pc/common/css_min',
           outputStyle : 'compress',
-          noLineComments: true
+          noLineComments: true,
+          force: true
         }
       }
     },
@@ -19,14 +20,21 @@ module.exports = function(grunt) {
         dest  : './public_html/pc/common/css_min',
       }
     },
-    watch: {
-      files: ['./public_html/pc/common/sass/**/*.scss', './public_html/pc/common/css/**/*.css'],
-      tasks: ['compass', 'cssmin']
+    esteWatch: {
+      options: {
+        dirs: ['./public_html/pc/common/sass/**/', './public_html/pc/common/css/**/']
+      },
+      scss: function(filepath){
+        return ["compass"]
+      },
+      css: function(filepath){
+        return ["cssmin"]
+      }
     },
   });
 
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-este-watch');
   grunt.registerTask('default', ['compass', 'cssmin']);
 }
