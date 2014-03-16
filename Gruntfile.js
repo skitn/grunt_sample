@@ -22,7 +22,10 @@ module.exports = function(grunt) {
     },
     esteWatch: {
       options: {
-        dirs: ['./public_html/pc/common/sass/**/', './public_html/pc/common/css/**/']
+        dirs: ['./public_html/pc/common/sass/**/', './public_html/pc/common/css/**/'],
+        livereload: {
+          enabled: false
+        }
       },
       scss: function(filepath){
         return ["compass"]
