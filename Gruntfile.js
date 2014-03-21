@@ -1,12 +1,13 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    clean: ["./public_html/pc/common/css_min", "./docs/styleguide/pc/"],
     compass: {
       pc: {
         options: {
           sassDir: './public_html/pc/common/sass',
-          cssDir: './public_html/pc/common/css_min',
-          outputStyle : 'compress',
+          cssDir: './public_html/pc/common/css',
+          outputStyle : 'compact',
           noLineComments: true,
           force: true
         }
@@ -20,6 +21,16 @@ module.exports = function(grunt) {
         dest  : './public_html/pc/common/css_min',
       }
     },
+    styledocco: {
+      pc: {
+        options: {
+          name: 'Style Guide',
+        },
+        files: {
+          './docs/styleguide/pc': './public_html/pc/common/css/**/'
+        }
+      }
+    },
     esteWatch: {
       options: {
         dirs: ['./public_html/pc/common/sass/**/', './public_html/pc/common/css/**/'],
@@ -28,7 +39,7 @@ module.exports = function(grunt) {
         }
       },
       scss: function(filepath){
-        return ["compass"]
+        return ["compass", "cssmin"]
       },
       css: function(filepath){
         return ["cssmin"]
@@ -36,8 +47,10 @@ module.exports = function(grunt) {
     },
   });
 
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-styledocco');
   grunt.loadNpmTasks('grunt-este-watch');
-  grunt.registerTask('default', ['compass', 'cssmin']);
+  grunt.registerTask('default', ['clean', 'compass', 'cssmin', 'styledocco']);
 }

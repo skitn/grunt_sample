@@ -3,4 +3,20 @@
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
+/*
+# ドッコの説明
+ 
+ここにコメントとか説明入れたりすると便利！
+ 
+`.inner_text`で文字を白くする
+ 
+```
+<div class="box">
+  <p>ボックス1</p>
+</div>
+<div class="box2 inner_text">
+  <p>ボックス2</p>
+</div>
+```
+*/
 @import "compass/reset";
